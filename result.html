@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOVI Result</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="story-card">
+      <p class="eyebrow">NOVI x OT Pop-up</p>
+      <h1>Result Card</h1>
+      <p id="configStatus" class="status"></p>
+      <p id="status" class="status">Loading result...</p>
+      <div id="resultContent" class="hidden">
+        <p id="displayName"></p>
+        <div id="functionalScore" class="score">-</div>
+        <p id="participantCode"></p>
+        <div id="resultRows" class="result-grid"></div>
+        <div class="stack">
+          <a id="passLink" class="button-link secondary" href="#">Open NOVI Pass</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="public-config.js"></script>
+  <script src="public-config-loader.js"></script>
+  <script src="supabase-rest-client.js"></script>
+  <script src="result.js"></script>
+</body>
+</html>

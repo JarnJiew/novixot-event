@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOVI x OT Register</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <p class="eyebrow">NOVI x OT Pop-up</p>
+      <h1>Register / &#3621;&#3591;&#3607;&#3632;&#3648;&#3610;&#3637;&#3618;&#3609;</h1>
+      <p>Register once, then use your NOVI Pass at every station.</p>
+      <p id="configStatus" class="status"></p>
+
+      <form id="registerForm" novalidate>
+        <label>Full name / &#3594;&#3639;&#3656;&#3629;
+          <input name="full_name" autocomplete="name">
+        </label>
+        <label>Nickname / &#3594;&#3639;&#3656;&#3629;&#3648;&#3621;&#3656;&#3609;
+          <input name="nickname">
+        </label>
+        <label>Phone / &#3648;&#3610;&#3629;&#3619;&#3660;&#3650;&#3607;&#3619;
+          <input name="phone" inputmode="tel" autocomplete="tel">
+        </label>
+        <label>Email
+          <input name="email" type="email" autocomplete="email">
+        </label>
+        <label>Age / &#3629;&#3634;&#3618;&#3640;
+          <input name="age" type="number" min="1" max="120">
+        </label>
+        <label>Gender
+          <select name="gender">
+            <option value="not_specified">Not specified</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="non_binary">Non-binary</option>
+          </select>
+        </label>
+        <label>Height cm
+          <input name="height_cm" type="number" min="80" max="230">
+        </label>
+        <label>Weight kg
+          <input name="weight_kg" type="number" min="20" max="250">
+        </label>
+
+        <label class="check"><input name="consent_data_collection" type="checkbox"> I consent to event data collection.</label>
+        <label class="check"><input name="health_disclaimer_accepted" type="checkbox"> I accept the health disclaimer.</label>
+        <label class="check"><input name="consent_public_leaderboard" type="checkbox"> Show me on public leaderboard.</label>
+        <label class="check"><input name="consent_result_card" type="checkbox" checked> Generate my result card.</label>
+        <label class="check"><input name="consent_marketing" type="checkbox"> Marketing consent.</label>
+
+        <button class="primary" type="submit">Generate NOVI Pass</button>
+      </form>
+
+      <p id="status" class="status"></p>
+      <div id="successBox" class="stack hidden">
+        <p class="success">Registration complete.</p>
+        <a id="openPassLink" class="button-link" href="#">Open NOVI Pass</a>
+        <a id="openResultLink" class="button-link secondary" href="#">Open Result Card</a>
+      </div>
+    </section>
+  </main>
+  <script src="public-config.js"></script>
+  <script src="public-config-loader.js"></script>
+  <script src="supabase-rest-client.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>

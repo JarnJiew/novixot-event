@@ -9,6 +9,7 @@ const participantCode = document.querySelector("#participantCode");
 const eventCode = document.querySelector("#eventCode");
 const tokenValue = document.querySelector("#tokenValue");
 const resultLink = document.querySelector("#resultLink");
+const qrPayloadNote = document.querySelector("#qrPayloadNote");
 
 function resultUrl(tokenValue) {
   return `/result?token=${encodeURIComponent(tokenValue)}`;
@@ -23,17 +24,26 @@ async function copy(text, label) {
   }
 }
 
-function passPayload(tokenValue) {
+function buildPassQrPayload(tokenValue) {
+  const mode = window.NOVIXOT_PUBLIC.QR_PAYLOAD_MODE || "public_url";
+  if (mode === "token_only") {
+    return tokenValue;
+  }
   const base = window.NOVIXOT_PUBLIC.PUBLIC_PASS_BASE_URL || "/pass";
   return `${base}${base.includes("?") ? "&" : "?"}token=${encodeURIComponent(tokenValue)}`;
 }
 
 function renderQr(data) {
-  const payload = passPayload(data.qr_token || token);
+  const payload = buildPassQrPayload(data.qr_token || token);
   qrFallback.classList.add("hidden");
   qrFallback.textContent = "";
+  if (qrPayloadNote) {
+    qrPayloadNote.textContent = window.NOVIXOT_PUBLIC.QR_PAYLOAD_MODE === "token_only"
+      ? "QR contains station token"
+      : "QR opens this pass";
+  }
   try {
-    window.NOVIXOT_QR.renderSvg(qrBox, payload, { size: 292 });
+    window.NOVIXOT_QR.renderSvg(qrBox, payload, { size: 280, quiet: 4, ecc: "M" });
   } catch (error) {
     qrBox.textContent = "";
     qrFallback.textContent = `QR rendering failed. Staff can use participant code/token. Payload: ${payload}`;
@@ -73,4 +83,5 @@ async function loadPass() {
 document.querySelector("#copyTokenBtn").addEventListener("click", () => copy(tokenValue.textContent, "Token"));
 document.querySelector("#copyCodeBtn").addEventListener("click", () => copy(participantCode.textContent, "Participant code"));
 
+window.buildPassQrPayload = buildPassQrPayload;
 loadPass();

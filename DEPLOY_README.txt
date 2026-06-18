@@ -8,6 +8,7 @@ Option A - Vercel Dashboard:
 5. Test:
    /register
    /pass
+   /qr-test
    /result
 
 Option B - Vercel CLI, only if user approves:
@@ -16,6 +17,7 @@ vercel --prod
 If clean routes do not work, test:
 - /register.html
 - /pass.html
+- /qr-test.html
 - /result.html
 
 Security:

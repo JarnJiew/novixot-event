@@ -4,6 +4,7 @@ This folder contains the deploy-ready static public mobile pages:
 
 - `register.html` and `register.js`
 - `pass.html` and `pass.js`
+- `qr-test.html` and `qr-test.js`
 - `result.html` and `result.js`
 - `styles.css`
 - `supabase-rest-client.js`
@@ -55,3 +56,7 @@ python scripts\build_public_web_package.py
 ```
 
 Upload `dist/public-web` to the chosen public HTTPS host. Copy and configure `public-config.js` in the deployed host environment.
+
+## QR Scan Test
+
+Open `/qr-test` after deployment to generate a browser QR without registering a participant. Scan it from another phone, with the full white margin visible and screen brightness high.

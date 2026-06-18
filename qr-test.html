@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOVI QR Test</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="card pass-header">
+      <p class="eyebrow">NOVI x OT Pop-up</p>
+      <h1>QR Test</h1>
+      <p class="status">Generate and scan this QR from another phone before event operation.</p>
+      <label for="payloadInput">Payload</label>
+      <input id="payloadInput" type="text" value="https://novixot-event.vercel.app/pass?token=QR-ad0eb4b1-9cb9-4f4f-b73d-25c9b80d3c04">
+      <button id="generateBtn" type="button">Generate QR</button>
+      <div id="qrTestBox" class="qr-box" aria-label="QR test output"></div>
+      <p class="qr-instruction">Scan this QR from another phone</p>
+      <p id="payloadOutput" class="qr-note"></p>
+      <div class="warning">
+        Scan tips: increase screen brightness, keep the full white quiet zone visible, avoid reflections, and do not crop the QR.
+      </div>
+    </section>
+  </main>
+  <script src="browser-qr.js"></script>
+  <script src="qr-test.js"></script>
+</body>
+</html>

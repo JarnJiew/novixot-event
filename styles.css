@@ -102,18 +102,32 @@ button, .button-link {
 .hidden { display: none !important; }
 .pass-header { text-align: center; }
 .qr-box {
-  width: min(292px, 82vw);
-  min-height: min(292px, 82vw);
-  margin: 12px auto 14px;
+  width: min(320px, calc(100vw - 56px));
+  min-height: min(320px, calc(100vw - 56px));
+  margin: 12px auto 8px;
   display: grid;
   place-items: center;
-  border: 6px solid var(--ink);
   background: white;
   color: var(--ink);
   text-align: center;
   overflow-wrap: anywhere;
-  padding: 12px;
+  padding: 20px;
   font-weight: 900;
+}
+.qr-box svg {
+  display: block;
+  width: min(280px, calc(100vw - 96px));
+  height: auto;
+  image-rendering: pixelated;
+}
+.qr-instruction {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 900;
+}
+.qr-note {
+  margin: 2px 0 14px;
+  font-size: 12px;
 }
 dl { margin: 0; display: grid; gap: 10px; }
 dt { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; }

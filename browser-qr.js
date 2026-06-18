@@ -688,6 +688,7 @@ var QRCode;
 			'<svg xmlns="http://www.w3.org/2000/svg"',
 			' width="' + size + '" height="' + size + '"',
 			' viewBox="0 0 ' + viewSize + " " + viewSize + '"',
+			' data-qr-payload="' + escapeAttr(payload || "") + '"',
 			' role="img" aria-label="' + escapeAttr(opts.label || DEFAULTS.label) + '"',
 			' shape-rendering="crispEdges">',
 			'<rect width="100%" height="100%" fill="#fff"/>',

@@ -17,6 +17,11 @@
         <div id="qrBox" class="qr-box" aria-label="NOVI Pass QR"></div>
         <p class="qr-instruction">Scan this QR at each station</p>
         <p id="qrPayloadNote" class="qr-note">QR opens this pass</p>
+        <div class="qr-debug">
+          <span class="qr-debug-label">QR opens</span>
+          <span id="qrPayloadValue" class="qr-debug-value"></span>
+          <button id="copyQrUrlBtn" class="small-button" type="button">Copy QR URL</button>
+        </div>
         <p id="qrFallback" class="status error hidden"></p>
         <dl>
           <div><dt>Display Name</dt><dd id="displayName"></dd></div>

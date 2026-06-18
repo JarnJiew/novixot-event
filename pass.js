@@ -10,6 +10,8 @@ const eventCode = document.querySelector("#eventCode");
 const tokenValue = document.querySelector("#tokenValue");
 const resultLink = document.querySelector("#resultLink");
 const qrPayloadNote = document.querySelector("#qrPayloadNote");
+const qrPayloadValue = document.querySelector("#qrPayloadValue");
+const copyQrUrlBtn = document.querySelector("#copyQrUrlBtn");
 
 function resultUrl(tokenValue) {
   return `/result?token=${encodeURIComponent(tokenValue)}`;
@@ -25,28 +27,38 @@ async function copy(text, label) {
 }
 
 function buildPassQrPayload(tokenValue) {
-  const mode = window.NOVIXOT_PUBLIC.QR_PAYLOAD_MODE || "public_url";
+  const config = window.NOVIXOT_PUBLIC_CONFIG || window.NOVIXOT_PUBLIC || {};
+  const mode = config.QR_PAYLOAD_MODE || "public_url";
   if (mode === "token_only") {
     return tokenValue;
   }
-  const base = window.NOVIXOT_PUBLIC.PUBLIC_PASS_BASE_URL || "/pass";
-  return `${base}${base.includes("?") ? "&" : "?"}token=${encodeURIComponent(tokenValue)}`;
+
+  const base = config.PUBLIC_PASS_BASE_URL || `${window.location.origin}/pass`;
+  const url = new URL(base, window.location.origin);
+  if (!url.pathname || url.pathname === "/") {
+    url.pathname = "/pass";
+  }
+  url.searchParams.set("token", tokenValue);
+  return url.toString();
 }
 
 function renderQr(data) {
-  const payload = buildPassQrPayload(data.qr_token || token);
+  const qrPayload = buildPassQrPayload(data.qr_token || token);
   qrFallback.classList.add("hidden");
   qrFallback.textContent = "";
   if (qrPayloadNote) {
-    qrPayloadNote.textContent = window.NOVIXOT_PUBLIC.QR_PAYLOAD_MODE === "token_only"
+    qrPayloadNote.textContent = (window.NOVIXOT_PUBLIC_CONFIG || window.NOVIXOT_PUBLIC || {}).QR_PAYLOAD_MODE === "token_only"
       ? "QR contains station token"
       : "QR opens this pass";
   }
+  if (qrPayloadValue) {
+    qrPayloadValue.textContent = qrPayload;
+  }
   try {
-    window.NOVIXOT_QR.renderSvg(qrBox, payload, { size: 280, quiet: 4, ecc: "M" });
+    window.NOVIXOT_QR.renderSvg(qrBox, qrPayload, { size: 280, quiet: 4, ecc: "M" });
   } catch (error) {
     qrBox.textContent = "";
-    qrFallback.textContent = `QR rendering failed. Staff can use participant code/token. Payload: ${payload}`;
+    qrFallback.textContent = `QR rendering failed. Staff can use participant code/token. Payload: ${qrPayload}`;
     qrFallback.classList.remove("hidden");
   }
 }
@@ -82,6 +94,7 @@ async function loadPass() {
 
 document.querySelector("#copyTokenBtn").addEventListener("click", () => copy(tokenValue.textContent, "Token"));
 document.querySelector("#copyCodeBtn").addEventListener("click", () => copy(participantCode.textContent, "Participant code"));
+copyQrUrlBtn.addEventListener("click", () => copy(qrPayloadValue.textContent, "QR URL"));
 
 window.buildPassQrPayload = buildPassQrPayload;
 loadPass();

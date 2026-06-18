@@ -14,9 +14,20 @@
       <p class="status">Generate and scan this QR from another phone before event operation.</p>
       <label for="payloadInput">Payload</label>
       <input id="payloadInput" type="text" value="https://novixot-event.vercel.app/pass?token=QR-ad0eb4b1-9cb9-4f4f-b73d-25c9b80d3c04">
+      <div class="preset-row" aria-label="QR test presets">
+        <button class="small-button secondary" type="button" data-preset="root">Root URL</button>
+        <button class="small-button secondary" type="button" data-preset="pass">Pass URL sample</button>
+        <button class="small-button secondary" type="button" data-preset="token">Token only</button>
+      </div>
       <button id="generateBtn" type="button">Generate QR</button>
       <div id="qrTestBox" class="qr-box" aria-label="QR test output"></div>
       <p class="qr-instruction">Scan this QR from another phone</p>
+      <div class="qr-debug">
+        <span class="qr-debug-label">Expected scan value</span>
+        <span id="expectedScanValue" class="qr-debug-value"></span>
+        <span class="qr-debug-label">Currently rendered</span>
+        <span id="renderedPayloadValue" class="qr-debug-value"></span>
+      </div>
       <p id="payloadOutput" class="qr-note"></p>
       <div class="warning">
         Scan tips: increase screen brightness, keep the full white quiet zone visible, avoid reflections, and do not crop the QR.
